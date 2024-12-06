@@ -108,9 +108,7 @@ async function init() {
     const normalizedWinningWord = winningWord.toUpperCase();
 
     for (let i = 0; i < normalizedWinningWord.length; i++) {
-      const playerWordLetter = normalizedPlayerWord[i];
-
-      if (playerWordLetter === normalizedWinningWord[i]) {
+      if (normalizedPlayerWord[i] === normalizedWinningWord[i]) {
         matchingLetterIndexes.push(i);
       }
     }
