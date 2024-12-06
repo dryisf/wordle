@@ -11,7 +11,8 @@ async function init() {
   const winningWordPromise = await fetch(
     "https://words.dev-apis.com/word-of-the-day"
   );
-  const { word: winningWord } = await winningWordPromise.json();
+  // const { word: winningWord } = await winningWordPromise.json();
+  const winningWord = "ivory";
 
   function changeLoaderState(isLoading) {
     const loaderHtmlElement = document.querySelector(".loader");
@@ -111,11 +112,15 @@ async function init() {
 
       if (playerWordLetter === normalizedWinningWord[i]) {
         matchingLetterIndexes.push(i);
-      } else if (
+      }
+    }
+
+    for (let i = 0; i < normalizedWinningWord.length; i++) {
+      if (
         isLetterInWord({
           playerWord: normalizedPlayerWord,
           winningWord: normalizedWinningWord,
-          letter: playerWordLetter,
+          letter: normalizedPlayerWord[i],
           matchingLetterIndexes,
           closeLetterIndexes,
         })
