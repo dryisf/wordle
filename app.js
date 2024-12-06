@@ -11,8 +11,7 @@ async function init() {
   const winningWordPromise = await fetch(
     "https://words.dev-apis.com/word-of-the-day"
   );
-  // const { word: winningWord } = await winningWordPromise.json();
-  const winningWord = "ivory";
+  const { word: winningWord } = await winningWordPromise.json();
 
   function changeLoaderState(isLoading) {
     const loaderHtmlElement = document.querySelector(".loader");
