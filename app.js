@@ -32,12 +32,14 @@ async function init() {
   }
 
   function removeLetterFromBox() {
-    const currentInputHtmlElement = getCurrentRowInputsList().item(currentBox);
+    const inputsList = getCurrentRowInputsList();
+    const lastInput = inputsList.item(inputsList.length - 1);
 
-    currentInputHtmlElement.setAttribute("value", "");
-
-    if (currentBox > 0) {
+    if (currentBox === 0 || Boolean(lastInput.getAttribute("value"))) {
+      inputsList.item(currentBox).setAttribute("value", "");
+    } else {
       currentBox--;
+      inputsList.item(currentBox).setAttribute("value", "");
     }
   }
 
