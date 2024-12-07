@@ -6,12 +6,14 @@ async function init() {
   let currentRow = 0;
   let currentBox = 0;
   let gameIsOver = false;
-  let wordIsBeingChecked = false;
+  let isLoading = true;
 
   const winningWordPromise = await fetch(
     "https://words.dev-apis.com/word-of-the-day"
   );
   const { word: winningWord } = await winningWordPromise.json();
+
+  isLoading = false;
 
   function changeLoaderState(isLoading) {
     const loaderHtmlElement = document.querySelector(".loader");
@@ -162,7 +164,7 @@ async function init() {
   }
 
   async function checkWord() {
-    wordIsBeingChecked = true;
+    isLoading = true;
     const letterInputsList = getCurrentRowInputsList();
     const lastInput = letterInputsList.item(letterInputsList.length - 1);
 
@@ -210,11 +212,11 @@ async function init() {
       }
       changeLoaderState(false);
     }
-    wordIsBeingChecked = false;
+    isLoading = false;
   }
 
   document.addEventListener("keydown", function ({ key }) {
-    if (gameIsOver || wordIsBeingChecked) {
+    if (gameIsOver || isLoading) {
       return;
     }
 
